@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -12,12 +12,18 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { Link } from "react-router-dom";
+import { DarModeContext } from "../../context/darkModeContext";
 
 export default function Sidebar() {
+  const { dispatch } = useContext(DarModeContext);
+
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">lamadmin</span>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <span className="logo">lamadmin</span>
+        </Link>
       </div>
       <hr />
       <div className="center">
@@ -28,18 +34,18 @@ export default function Sidebar() {
             <span>Dashboard</span>
           </li>
           <p className="title">LISTS</p>
-          {/* <Link to="/users" style={{ textDecoration: "none" }}> */}
-          <li>
-            <PersonOutlineIcon className="icon" />
-            <span>Users</span>
-          </li>
-          {/* </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}> */}
-          <li>
-            <StoreIcon className="icon" />
-            <span>Products</span>
-          </li>
-          {/* </Link> */}
+          <Link to="/users" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonOutlineIcon className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
+          <Link to="/products" style={{ textDecoration: "none" }}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Products</span>
+            </li>
+          </Link>
           <li>
             <CreditCardIcon className="icon" />
             <span>Orders</span>
@@ -82,8 +88,14 @@ export default function Sidebar() {
         </ul>
       </div>
       <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
+        <div
+          className="colorOption"
+          onClick={() => dispatch({ type: "LIGHT" })}
+        ></div>
+        <div
+          className="colorOption"
+          onClick={() => dispatch({ type: "DARK" })}
+        ></div>
       </div>
     </div>
   );
