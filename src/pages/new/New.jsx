@@ -14,6 +14,12 @@ export default function New({ inputs, title }) {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
   const handleClick = async (e) => {
+    let user = JSON.parse(localStorage.getItem("user")) || null;
+    const config = {
+      headers: {
+        access_token: user.access_token,
+      },
+    };
     e.preventDefault();
     const data = new FormData();
     data.append("file", file);
@@ -28,7 +34,7 @@ export default function New({ inputs, title }) {
         ...info,
         img: url,
       };
-      await axios.post(`${BASE_URL}auth/register`, newUser);
+      await axios.post(`${BASE_URL}auth/register`, newUser, config);
     } catch (error) {
       console.log(error);
     }

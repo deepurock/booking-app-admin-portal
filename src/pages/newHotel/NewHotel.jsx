@@ -27,6 +27,12 @@ export default function NewHotel() {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    let user = JSON.parse(localStorage.getItem("user")) || null;
+    const config = {
+      headers: {
+        access_token: user.access_token,
+      },
+    };
     try {
       const list = await Promise.all(
         Object.values(files).map(async (file) => {
@@ -46,7 +52,7 @@ export default function NewHotel() {
         rooms,
         photos: list,
       };
-      await axios.post(`${BASE_URL}hotels`, newhotel);
+      await axios.post(`${BASE_URL}hotels`, newhotel, config);
     } catch (error) {}
   };
   return (

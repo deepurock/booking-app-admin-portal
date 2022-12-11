@@ -22,8 +22,14 @@ export default function Datatable({ columns }) {
   }, [data]);
 
   const handleDelete = async (id) => {
+    let user = JSON.parse(localStorage.getItem("user")) || null;
+    const config = {
+      headers: {
+        access_token: user.access_token,
+      },
+    };
     try {
-      await axios.delete(`${BASE_URL}${path}/${id}`);
+      await axios.delete(`${BASE_URL}${path}/${id}`, config);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
