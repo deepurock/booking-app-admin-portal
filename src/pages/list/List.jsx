@@ -4,13 +4,13 @@ import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./list.scss";
 
-export default function List() {
+export default function List({ columns }) {
   return (
     <div className="list">
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        <Datatable />
+        <Datatable columns={columns} />
       </div>
     </div>
   );
