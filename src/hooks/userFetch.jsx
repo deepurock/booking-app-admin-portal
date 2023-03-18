@@ -8,9 +8,15 @@ const useFetch = (url) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      let user = JSON.parse(localStorage.getItem("user")) || null;
+      const config = {
+        headers: {
+          access_token: user.access_token,
+        },
+      };
       setLoading(true);
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(url, config);
         setData(res.data);
       } catch (err) {
         setError(err);
@@ -21,9 +27,15 @@ const useFetch = (url) => {
   }, [url]);
 
   const reFetch = async () => {
+    let user = JSON.parse(localStorage.getItem("user")) || null;
+    const config = {
+      headers: {
+        access_token: user.access_token,
+      },
+    };
     setLoading(true);
     try {
-      const res = await axios.get(url);
+      const res = await axios.get(url, config);
       setData(res.data);
     } catch (err) {
       setError(err);

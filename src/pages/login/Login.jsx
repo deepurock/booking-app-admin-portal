@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 // import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
-
+import image from "../../admin.jpg";
 import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -37,8 +37,17 @@ export default function Login() {
     }
   };
   return (
-    <div className="login">
-      <div className="lContainer">
+    <div
+      className="login"
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "1440px,724px",
+      }}
+    >
+      <div className="lContainer" style={{ width: "50%" }}>
+        <h1 className="title">Tripadvisor Admin Portal</h1>
+
         <input
           type="text"
           placeholder="username"

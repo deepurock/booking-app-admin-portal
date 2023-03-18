@@ -24,7 +24,7 @@ export default function Home() {
           <Chart aspect={2 / 1} title="Last 6 Months (Revenue)" />
         </div>
         <div className="listContainer">
-          <div className="listTitle">Latest Transaction</div>
+          <div className="listTitle">Registerd Users</div>
           <Table />
         </div>
       </div>

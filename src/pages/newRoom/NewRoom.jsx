@@ -19,10 +19,20 @@ export default function NewRoom() {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    let user = JSON.parse(localStorage.getItem("user")) || null;
+    const config = {
+      headers: {
+        access_token: user.access_token,
+      },
+    };
     const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
 
     try {
-      await axios.post(`${BASE_URL}rooms/${hotelId}`, { ...info, roomNumbers });
+      await axios.post(
+        `${BASE_URL}rooms/${hotelId}`,
+        { ...info, roomNumbers },
+        config
+      );
     } catch (error) {
       console.log(error);
     }

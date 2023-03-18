@@ -7,8 +7,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./table.scss";
+import useFetch from "../../hooks/userFetch";
+import axios from "axios";
 
 export default function List() {
+  const BASE_URL = "http://localhost:8000/api/";
+  const { data, loading, error } = useFetch(`${BASE_URL}users`);
   const rows = [
     {
       id: 1143155,
@@ -68,31 +72,35 @@ export default function List() {
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">Tracking ID</TableCell>
-            <TableCell className="tableCell">Product</TableCell>
-            <TableCell className="tableCell">Customer</TableCell>
-            <TableCell className="tableCell">Date</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
-            <TableCell className="tableCell">Payment Method</TableCell>
-            <TableCell className="tableCell">Status</TableCell>
+            <TableCell className="tableCell">User</TableCell>
+            <TableCell className="tableCell">User Name</TableCell>
+            <TableCell className="tableCell">Country</TableCell>
+            <TableCell className="tableCell">City</TableCell>
+            <TableCell className="tableCell">Phone</TableCell>
+            {/* <TableCell className="tableCell">Status</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+          {data.map((row) => (
+            <TableRow key={row._id}>
+              <TableCell className="tableCell">{row._id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
+                  <img
+                    src={row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"}
+                    alt=""
+                    className="image"
+                  />
+                  {row.email}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.customer}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
-              <TableCell className="tableCell">
-                <span className={`status ${row.status}`}>{row.status}</span>
-              </TableCell>
+              <TableCell className="tableCell">{row.userName}</TableCell>
+              <TableCell className="tableCell">{row.country}</TableCell>
+              <TableCell className="tableCell">{row.city}</TableCell>
+              <TableCell className="tableCell">{row.phone}</TableCell>
+              {/* <TableCell className="tableCell">
+                <span className={`status ${row.userName}`}>{row.userName}</span>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
