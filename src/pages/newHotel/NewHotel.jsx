@@ -15,7 +15,10 @@ export default function NewHotel() {
 
   const { data, loading, error } = useFetch(`${BASE_URL}rooms`);
   const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setInfo((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value.toLowerCase(),
+    }));
   };
   const handleSelect = (e) => {
     const value = Array.from(

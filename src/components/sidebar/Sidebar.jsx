@@ -12,12 +12,17 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DarModeContext } from "../../context/darkModeContext";
 
 export default function Sidebar() {
   const { dispatch } = useContext(DarModeContext);
-
+  let navigate = useNavigate();
+  const routeChange = () => {
+    localStorage.clear();
+    let path = `/login`;
+    navigate(path);
+  };
   return (
     <div className="sidebar">
       <div className="top">
@@ -85,7 +90,7 @@ export default function Sidebar() {
           </li>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <span onClick={routeChange}>Logout</span>
           </li>
         </ul>
       </div>
