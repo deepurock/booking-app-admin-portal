@@ -41,7 +41,11 @@ export default function Datatable({ columns }) {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link
+              to="/users/test"
+              style={{ textDecoration: "none" }}
+              state={{ userInfo: params.row }}
+            >
               <div className="viewButton">View</div>
             </Link>
             <div

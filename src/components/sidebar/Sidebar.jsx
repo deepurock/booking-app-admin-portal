@@ -14,9 +14,12 @@ import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { DarModeContext } from "../../context/darkModeContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Sidebar() {
   const { dispatch } = useContext(DarModeContext);
+  const { user } = useContext(AuthContext);
+
   let navigate = useNavigate();
   const routeChange = () => {
     localStorage.clear();
@@ -34,10 +37,13 @@ export default function Sidebar() {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
+
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
@@ -84,10 +90,17 @@ export default function Sidebar() {
             <span>Settings</span>
           </li>
           <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
+          <Link
+            to="/users/test"
+            style={{ textDecoration: "none" }}
+            state={{ userInfo: user }}
+          >
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Profile</span>
+            </li>
+          </Link>
+
           <li>
             <ExitToAppIcon className="icon" />
             <span onClick={routeChange}>Logout</span>
